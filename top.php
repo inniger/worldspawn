@@ -1,3 +1,4 @@
 <?php
-echo "high score";
+echo "high score<br/>";
+echo "you rock";
  ?>
