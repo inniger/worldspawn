@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Hellow</title>
+    <style>
+    canvas{
+      height: 800px;
+      width: 800px;
+    }
+    </style>
+  </head>
+  <body>
+  </body>
+  <script type="text/javascript" src="js/three.js"></script>
+  <script type="text/javascript">
+    class game{
+      static _self = false;
+      static _scene = false;
+      static _camera = false;
+      static _renderer = false;
+      static _debug = false;
+      static _geometry = false;
+      static _material = false;
+      static _canvas = false;
+      static _cube = false;
+      static handleKeyDown = (e)=>{
+        console.log(e.keyCode);
+        if(e.keyCode == 37){
+          this._camera.position.x -=.1;
+        }
+        if(e.keyCode == 39){
+          this._camera.position.x +=.1;
+        }
+        if(e.keyCode == 38){
+          this._camera.position.z -=.1;
+        }
+        if(e.keyCode == 40){
+          this._camera.position.z +=.1;
+        }
+      }
+      static init = ()=>{
+        addEventListener('keydown', this.handleKeyDown);
+        this._self = this;
+        this._scene = new THREE.Scene();
+        this._camera = new THREE.PerspectiveCamera( 75, window.innerWidth / window.innerHeight, 0.1, 1000);
+        this._camera.rotateX(-0.5);
+        this._renderer = new THREE.WebGLRenderer();
+        this._renderer.setSize( window.innerWidth, window.innerHeight);
+        document.body.appendChild(this._renderer.domElement);
+        this._canvas = this._renderer.domElement;
+        this._geometry = new THREE.BoxGeometry(15, .1, 15);
+        this._material = new THREE.MeshLambertMaterial({color:0x98825A} );
+        this._cube = new THREE.Mesh( this._geometry, this._material );
+        this._scene.add( this._cube );
+        //let cube2 = new THREE.Mesh( new THREE.BoxGeometry(1, 1, 1), new THREE.MeshBasicMaterial({color:0x98825A}));
+        //cube2.position.y += .75;
+        //this._scene.add( cube2 );
+        this._camera.position.z = 5;
+        this._camera.position.y = 5;
+        const light = new THREE.PointLight( 0xf1ebc8, 2, 0 );
+        light.position.set( 5, 5, 0 );
+        this._scene.add( light );
+        this.animate();
+        this._debug = 10;
+      }
+      static animate = ()=>{
+        this._renderer.render( this._scene, this._camera);
+        requestAnimationFrame( this.animate );
+      }
+      static createLand(){
+      }
+    }
+    /*
+    const scene = new THREE.Scene();
+    const camera = new THREE.PerspectiveCamera( 75, window.innerWidth / window.innerHeight, 0.1, 1000 );
+
+    const renderer = new THREE.WebGLRenderer();
+    renderer.setSize( window.innerWidth, window.innerHeight );
+    document.body.appendChild( renderer.domElement );
+    const geometry = new THREE.BoxGeometry();
+    const material = new THREE.MeshBasicMaterial( { color: 0x00ff00 } );
+    const cube = new THREE.Mesh( geometry, material );
+    scene.add( cube );
+
+    camera.position.z = 5;
+    function animate() {
+    	requestAnimationFrame( animate );
+    	renderer.render( scene, camera );
+    }
+    animate();
+*/
+    game.init();
+  </script>
+</html>
