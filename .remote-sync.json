@@ -1,0 +1,19 @@
+{
+  "logger": {
+    "title": "Remote Sync"
+  },
+  "uploadOnSave": true,
+  "useAtomicWrites": false,
+  "deleteLocal": false,
+  "hostname": "app.toyburg.com",
+  "port": "22",
+  "target": "/home/tbapp/public_html/tests/eric/github/worldspawn-master/",
+  "ignore": [
+    ".remote-sync.json",
+    ".git/**"
+  ],
+  "username": "tbapp",
+  "password": "iluMac05appGD1",
+  "watch": [],
+  "transport": "scp"
+}
